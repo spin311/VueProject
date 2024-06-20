@@ -1,31 +1,23 @@
 <script setup lang="ts">
-import catApi from '../services/catApi';
-import { onMounted, type Ref, ref, type UnwrapRef } from 'vue'
-let catData: Ref<UnwrapRef<CatData[]>> = ref([]);
-let isLoading: Ref<boolean> = ref(false);
-
-function fetchCatData(numCats: number = 40) {
-  isLoading.value = true;
-  catApi.fetchCatData(numCats).then((data: CatData[]) => {
-    isLoading.value = false;
-    catData.value = data;
-  });
-}
+import { onMounted } from 'vue'
+import { useHomeStore } from '@/stores/homeStore'
+const store = useHomeStore();
 
 onMounted(() => {
-  fetchCatData();
+  if (!store.hasCatData)    store.fetchCatData();
+  if (!store.hasCategories) store.getCategories();
 });
 </script>
 
 <template>
   <main>
     <h1>Cat Gallery</h1>
-    <div v-if="isLoading">Loading...</div>
+    <div v-if="store.isLoading" class="spinner-container">
+      <div class="spinner"><font-awesome-icon icon="spinner" spin /></div>
+    </div>
     <div class="cat-gallery">
-      <div v-for="cat in catData" :key="cat.id">
-        <div class="cat-item">
+      <div v-for="cat in store.catData" :key="cat.id" class="cat-item">
           <img :src="cat.url" :alt="'cat-' + cat.id" />
-        </div>
       </div>
     </div>
   </main>
@@ -39,8 +31,20 @@ onMounted(() => {
   justify-content: center;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  font-size: 5em;
+
+}
+
 .cat-item {
-  flex: 0 0 25%;
+  flex: 0 0 23%;
   max-width: 300px;
   max-height: 300px;
   margin: 1%;
@@ -49,8 +53,8 @@ onMounted(() => {
 
 img {
   width: 100%;
-  width: 200px;
-  height: 150px;
+  width: 300px;
+  height: 200px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

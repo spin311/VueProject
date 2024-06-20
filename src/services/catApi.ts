@@ -13,12 +13,7 @@ export default {
   getData(endpoint: string, params = {}){
     return catApi.get(endpoint, { params });
   },
-  fetchImagesUrls(numImages: number): Promise<string[]> {
-    return this.getData('/images/search', { limit: numImages }).then(
-      (response) => response.data.map((catObj: { url: string }) => catObj.url)
-    );
-  },
-  fetchCatData(num: number = 10): Promise<CatData[]> {
+  async fetchCatData(num: number = 10): Promise<CatData[]> {
     return this.getData('/images/search', { limit: num }).then(
       (response) => response.data.map((item: any) => ({
         id: item.id,
@@ -33,8 +28,8 @@ export default {
     );
 
   },
-  getImages() {
-    return catApi.get(`/images/search`);
+  async getCategories(): Promise<Category[]> {
+    return catApi.get('/categories').then((response) => response.data);
   },
   getBreeds() {
     return catApi.get('/breeds');

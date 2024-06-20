@@ -10,3 +10,8 @@ interface Breed {
   description: string,
   wikipedia_url: string,
 }
+
+interface Category {
+  id: number,
+  name: string
+}
