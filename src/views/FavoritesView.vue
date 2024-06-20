@@ -4,7 +4,7 @@
 
 <template>
   <main>
-    <h1>ShopView</h1>
+    <h1>Favorites</h1>
   </main>
 </template>
 
