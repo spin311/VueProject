@@ -45,7 +45,7 @@ export default {
   getBreeds() {
     return catApi.get('/breeds');
   },
-  
+
   getFavorites() {
     return catApi.get('/favourites');
   }

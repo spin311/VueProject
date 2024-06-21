@@ -5,37 +5,56 @@ const props = defineProps<{
   isFavorite?: boolean
 }>();
 
-const emit = defineEmits(['favorite-change']);
+const emit = defineEmits(['favorite-change', 'copy-image', 'download-image']);
 
 const heartIcon = computed(() => (props.isFavorite ? 'fas fa-heart' : 'far fa-heart'));
 
 const heartClass = computed(() => {
-  return props.isFavorite ? 'favorite' : 'nonFavorite'
+  return props.isFavorite ? 'favorite' : 'dark'
 });
 const favoriteChange = () => {
   emit('favorite-change');
+}
+
+function copyImage() {
+  emit('copy-image');
+}
+
+function downloadImage() {
+  emit('download-image');
 }
 
 </script>
 
 <template>
   <div class="cardButtons">
-    <font-awesome-icon :icon="heartIcon" :class="heartClass" @click="favoriteChange"/>
-    <span class="card-button"></span>
+    <div>
+    <font-awesome-icon :icon="heartIcon" :class="heartClass" class="card-button" @click="favoriteChange"/>
+    <font-awesome-icon icon="far fa-paper-plane" class="dark card-button" @click="copyImage" title="Copy image" />
+    </div>
+    <font-awesome-icon icon="fas fa-arrow-down" class="dark card-button" @click="downloadImage" title="Download" />
   </div>
 </template>
 
 <style scoped>
+
+.card-button {
+  font-size: 1.7em;
+  cursor: pointer;
+  padding: 3px;
+}
+
 .cardButtons {
   display: flex;
   justify-content: space-between;
-  font-size: 2em;
+  align-items: center;
+
 }
 
 .favorite {
   color: #ff0000;
 }
-.nonFavorite {
+.dark {
   color: #181818;
 }
 </style>
