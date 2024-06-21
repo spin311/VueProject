@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
-import { useHomeStore } from '@/stores/homeStore';
+import { useCatDataStore } from '@/stores/catDataStore';
 import GalleryCard from "@/components/GalleryCard.vue";
 import SpinnerComponent from '@/components/SpinnerComponent.vue';
 
-const store = useHomeStore();
+const store = useCatDataStore();
 
 onMounted(() => {
-  if (!store.hasCatData)    store.fetchCatData();
-  if (!store.hasCategories) store.getCategories();
+  if (!store.hasCatData)    store.loadCatData();
+  if (!store.hasCategories) store.loadCategories();
 });
 </script>
 

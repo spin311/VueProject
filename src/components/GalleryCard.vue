@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import ImageActions from '@/components/ImageActions.vue';
-import { useHomeStore } from '@/stores/homeStore';
+import { useCatDataStore } from '@/stores/catDataStore';
 import type { CatData } from '@/types/types';
 import axios from 'axios';
 const props = defineProps<{
   cat: CatData
 }>();
 
-const { toggleFavorite } = useHomeStore();
+const { toggleFavorite } = useCatDataStore();
 
 function OnFavoriteChange() {
   toggleFavorite(props.cat.id);
 }
 
+// Copy the image URL to the clipboard
 function OnCopyImage() {
-  //copy cat.url to clipboard
   navigator.clipboard.writeText(props.cat.url);
   //TODO: show a banner message
 
 }
 
 const OnDownloadImage = () => {
+  // use proxy because the cat API does not allow direct download
   const proxyUrl = `http://localhost:3000/download?url=${encodeURIComponent(props.cat.url)}`;
 
   axios({

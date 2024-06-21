@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { Banner } from '@/types/types';
-import { useHomeStore } from '@/stores/homeStore'
+import { useCatDataStore } from '@/stores/catDataStore'
 import BannerComponent from '@/components/BannerComponent.vue';
 import BannerContainer from '@/components/BannerContainer.vue';
+import { useBannerStore } from '@/stores/bannerStore'
 
-const { banners, removeBanner } = useHomeStore();
+const { banners, removeBanner } = useBannerStore();
 
 function OnCloseBanner(banner: Banner) {
   removeBanner(banner);
