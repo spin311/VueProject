@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { CatData, Category } from '../types/types';
 
 const catApi = axios.create({
   baseURL: 'https://api.thecatapi.com/v1',
@@ -9,10 +10,18 @@ const catApi = axios.create({
   },
 });
 
+catApi.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  console.error(error);
+  return Promise.reject(error);
+});
+
 export default {
   getData(endpoint: string, params = {}){
     return catApi.get(endpoint, { params });
   },
+
   async fetchCatData(num: number = 10): Promise<CatData[]> {
     return this.getData('/images/search', { limit: num }).then(
       (response) => response.data.map((item: any) => ({
@@ -28,12 +37,15 @@ export default {
     );
 
   },
+
   async getCategories(): Promise<Category[]> {
     return catApi.get('/categories').then((response) => response.data);
   },
+
   getBreeds() {
     return catApi.get('/breeds');
   },
+  
   getFavorites() {
     return catApi.get('/favourites');
   }
