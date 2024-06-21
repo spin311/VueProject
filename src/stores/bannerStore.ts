@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia';
-import type { Ref, UnwrapRef } from 'vue'
+import { type Ref, type UnwrapRef, watch } from 'vue'
 import type { Banner } from '@/types/types'
 import { ref } from 'vue'
 import { BannerType } from '@/types/types'
@@ -7,7 +7,6 @@ import { getGuid } from '../utils/utils';
 
 export const useBannerStore = defineStore('banner', () => {
   const banners: Ref<UnwrapRef<Set<Banner>>> = ref(new Set<Banner>());
-
 
 
   function addBannerMessage(message: string, bannerType: BannerType): void {

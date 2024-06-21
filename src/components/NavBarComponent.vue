@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Banner } from '@/types/types';
-import { useCatDataStore } from '@/stores/catDataStore'
 import BannerComponent from '@/components/BannerComponent.vue';
 import BannerContainer from '@/components/BannerContainer.vue';
 import { useBannerStore } from '@/stores/bannerStore'

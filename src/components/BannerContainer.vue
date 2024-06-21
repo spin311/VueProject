@@ -10,10 +10,9 @@
   width: 100%;
   position: fixed;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   padding: 5px;
-  gap: 10px;
 }
 </style>

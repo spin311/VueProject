@@ -9,6 +9,7 @@ export const useCatDataStore = defineStore('catData', () => {
   const categories: Ref<UnwrapRef<Category[]>> = ref([]);
   const hasCatData: ComputedRef<boolean> = computed((): boolean => catData.value.length > 0);
   const hasCategories: ComputedRef<boolean> = computed((): boolean => categories.value.length > 0);
+  const catFavorites: ComputedRef<CatData[]> = computed((): CatData[] => catData.value.filter((cat: CatData): boolean => !!cat.isFavorite));
 
   function toggleFavorite(catId: string): void {
     const catIndex: number = catData.value.findIndex((cat: CatData): boolean => cat.id === catId);
@@ -28,6 +29,7 @@ export const useCatDataStore = defineStore('catData', () => {
   return {
     isLoading,
     catData,
+    catFavorites,
     categories,
     hasCatData,
     hasCategories,

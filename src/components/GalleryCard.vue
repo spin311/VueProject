@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import ImageActions from '@/components/ImageActions.vue';
 import { useCatDataStore } from '@/stores/catDataStore';
-import type { CatData } from '@/types/types';
+import { BannerType, type CatData } from '@/types/types'
 import axios from 'axios';
+import { useBannerStore } from '@/stores/bannerStore'
 const props = defineProps<{
   cat: CatData
 }>();
 
 const { toggleFavorite } = useCatDataStore();
+const { addBannerMessage } = useBannerStore();
 
 function OnFavoriteChange() {
   toggleFavorite(props.cat.id);
@@ -16,7 +18,7 @@ function OnFavoriteChange() {
 // Copy the image URL to the clipboard
 function OnCopyImage() {
   navigator.clipboard.writeText(props.cat.url);
-  //TODO: show a banner message
+  addBannerMessage('image URL copied to clipboard', BannerType.INFO);
 
 }
 
@@ -35,7 +37,9 @@ const OnDownloadImage = () => {
     link.setAttribute('download', props.cat.url.split('/').pop() || 'cat.jpg');
     document.body.appendChild(link);
     link.click();
+    addBannerMessage('image downloaded successfully!', BannerType.SUCCESS);
   }).catch((error) => {
+    addBannerMessage('error downloading the image: ' + error.message.toString(), BannerType.ERROR);
     console.error('Error downloading the image: ', error);
   });
 };

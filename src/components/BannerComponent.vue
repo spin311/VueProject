@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(['close-banner']);
-const CLOSE_BANNER_TIME: number = 10000;
+const CLOSE_BANNER_TIME: number = 3000;
 const closeBanner = () => {
   emit('close-banner', props.banner);
 }

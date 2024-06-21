@@ -24,7 +24,7 @@ export interface Banner {
 }
 
 export enum BannerType {
-  success = 'success',
-  error = 'error',
-  info = 'info',
+  SUCCESS = 'success',
+  ERROR = 'error',
+  INFO = 'info',
 }
