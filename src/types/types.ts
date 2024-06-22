@@ -10,6 +10,8 @@ export interface Breed {
   name: string,
   description: string,
   wikipedia_url: string,
+  temperament: string,
+  origin: string,
 }
 
 export interface Category {

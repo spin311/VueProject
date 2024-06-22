@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { CatData, Category } from '../types/types';
+import type { Breed, CatData } from '../types/types'
 
 const catApi = axios.create({
   baseURL: 'https://api.thecatapi.com/v1',
@@ -10,6 +10,18 @@ const catApi = axios.create({
   },
 });
 
+function mapBreedData(breed: any): Breed {
+  return {
+    id: breed.id,
+    name: breed.name,
+    description: breed.description,
+    wikipedia_url: breed.wikipedia_url,
+    temperament: breed.temperament,
+    origin: breed.origin,
+  };
+}
+
+// Add a response interceptor to log errors
 catApi.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
@@ -22,31 +34,18 @@ export default {
     return catApi.get(endpoint, { params });
   },
 
-  async fetchCatData(num: number = 10): Promise<CatData[]> {
-    return this.getData('/images/search', { limit: num }).then(
+  async fetchCatData(num: number = 10, params: any = {limit: num}): Promise<CatData[]> {
+    return this.getData('/images/search', params).then(
       (response) => response.data.map((item: any) => ({
         id: item.id,
-        breeds: item.breeds.map((breed: any) => ({
-          id: breed.id,
-          name: breed.name,
-          description: breed.description,
-          wikipedia_url: breed.wikipedia_url,
-        })),
+        breeds: item.breeds.map(mapBreedData),
         url: item.url,
+        isFavorite: false
       }))
     );
 
   },
-
-  async getCategories(): Promise<Category[]> {
-    return catApi.get('/categories').then((response) => response.data);
-  },
-
   getBreeds() {
-    return catApi.get('/breeds');
-  },
-
-  getFavorites() {
-    return catApi.get('/favourites');
-  }
+    return catApi.get('/breeds').then((response) => response.data.map(mapBreedData));
+    },
 }

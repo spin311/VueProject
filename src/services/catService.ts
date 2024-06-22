@@ -1,28 +1,26 @@
-import type { CatData, Category } from '@/types/types'
+import type { Breed, CatData, Category } from '@/types/types'
 import catApi from '@/services/catApi'
 import { BannerType } from '@/types/types'
 import { useBannerStore } from '@/stores/bannerStore'
 
 
 
-export async function fetchCatData(num: number = 20): Promise<CatData[]> {
+export async function fetchCatData(num: number = 20, params: any = {limit: num}): Promise<CatData[]> {
   const { addBannerMessage } = useBannerStore();
   try {
-    return await catApi.fetchCatData(num);
+    return await catApi.fetchCatData(num, params);
   } catch (error: any) {
     addBannerMessage('Error fetching data, try reloading website : ' + error.message.toString(), BannerType.ERROR)
-    console.error('Error fetching data: ', error);
   }
   return [];
 }
 
-export async function fetchCategories(): Promise<Category[]> {
-  const { addBannerMessage } = useBannerStore();
+export async function fetchBreeds(): Promise<Breed[]> {
   try {
-    return await catApi.getCategories();
+    return await catApi.getBreeds();
   } catch (error: any) {
-    addBannerMessage('Error fetching categories: ' + error.message.toString(), BannerType.ERROR)
-    console.error('Error fetching categories:', error);
+    const { addBannerMessage } = useBannerStore();
+    addBannerMessage('Error fetching cat breeds: ' + error.message.toString(), BannerType.ERROR)
   }
   return [];
 }
