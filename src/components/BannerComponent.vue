@@ -16,7 +16,7 @@ const bannerClass = {
     success: props.banner.type === 'success',
     info: props.banner.type === 'info',
 }
-
+// when the component(banner) is mounted, close the banner after CLOSE_BANNER_TIME
 onMounted(() => {
   setTimeout(closeBanner, CLOSE_BANNER_TIME);
 });

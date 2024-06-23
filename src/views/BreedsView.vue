@@ -8,6 +8,7 @@ import ScrollableGallery from '@/components/ScrollableGallery.vue'
 const store = useCatDataStore();
 const CATS_PER_BREED: number = 7;
 onMounted(async () => {
+  // load breeds if they are not already loaded and set the first breed as the selected breed
   if (store.catBreeds.length < 1) {
     await store.loadBreeds();
     selectedBreedId.value = store.catBreeds[0].id;

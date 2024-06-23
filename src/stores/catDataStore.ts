@@ -6,15 +6,18 @@ import { fetchBreeds, fetchCatData } from '@/services/catService'
 // storage for catData, catFavorites, catBreeds, catBreedData, currentImageIndex
 export const useCatDataStore = defineStore('catData', () => {
 
-  // cat data
+  // when waiting for data from API
   const isLoading: Ref<boolean> = ref(false);
+  // cat data (Home and Favorites)
   const catData: Ref<UnwrapRef<CatData[]>> = ref([]);
   // favorites array, to keep order of favorites
   const catFavorites: Ref<UnwrapRef<CatData[]>> = ref([]);
 
   // breed data
+
+  // current cat data for the breed view
   const currentBreedCat: ComputedRef<CatData> = computed((): CatData => catBreedData.value[currentImageIndex.value]);
-  // id of the breed in catBreedData to set as value in the select
+  // need to set the value of select breed tag when switching views
   const selectedBreedId: ComputedRef<string> = computed((): string => {
     if (catBreedData.value.length > 0 && catBreedData.value[0]?.breeds) {
       return catBreedData.value[0]?.breeds[0]?.id;
@@ -70,6 +73,7 @@ export const useCatDataStore = defineStore('catData', () => {
     isLoading.value = true;
     const params: any = { limit: num };
     if (breedId) {
+      // add breed id to params for API
       params.breed_id = breedId;
     }
     catBreedData.value = await fetchCatData(num, params);

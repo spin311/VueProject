@@ -5,6 +5,7 @@ const props = defineProps<{
   isFavorite?: boolean
 }>();
 
+// emit events to GalleryCard component to handle image actions
 const emit = defineEmits(['favorite-change', 'copy-image', 'download-image']);
 
 const heartIcon = computed(() => (props.isFavorite ? 'fas fa-heart' : 'far fa-heart'));

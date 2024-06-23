@@ -6,11 +6,12 @@ Simple vue project to display a gallery of cats with buttons to like or download
 
 ## Run project locally
 1. Clone the repository
-2. Run `npm install`
-3. Run `npm run dev`
-4. cd `proxy-server` 
-5. Run `node server.js` to start the proxy server
-6. Open [`http://localhost:5173/VueProject/`](http://localhost:5173/VueProject/) in your browser
+2. Add a `.env` file in the root directory, add the following line: VITE_CAT_API_KEY={YOUR_CAT_API_KEY}
+3. Run `npm install`
+4. Run `npm run dev`
+5. cd `proxy-server` 
+6. Run `node server.js` to start the proxy server
+7. Open [`http://localhost:5173/VueProject/`](http://localhost:5173/VueProject/) in your browser
 
 ## Features
 ![Features](/images/features.jpg)

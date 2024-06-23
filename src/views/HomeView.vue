@@ -8,6 +8,7 @@ const store = useCatDataStore();
 const NUM_CATS_PER_LOAD = 12;
 
 onMounted(() => {
+  // Load initial cat data
   if (store.catData.length < 1) store.loadCatData(NUM_CATS_PER_LOAD);
   window.addEventListener('scroll', handleScroll);
 
@@ -18,7 +19,7 @@ onUnmounted(() => {
 });
 
 function handleScroll() {
-  // Check if user has scrolled to the bottom
+  // Check if user has scrolled to the bottom of the page
   const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
 
   if (nearBottom) {

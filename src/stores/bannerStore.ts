@@ -9,7 +9,7 @@ export const useBannerStore = defineStore('banner', () => {
   // all currently displayed banners
   const banners: Ref<UnwrapRef<Set<Banner>>> = ref(new Set<Banner>());
 
-
+  // create a new banner message and add it to the banners
   function addBannerMessage(message: string, bannerType: BannerType): void {
     const banner: Banner = {
       id: getGuid(),

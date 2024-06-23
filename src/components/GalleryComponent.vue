@@ -4,7 +4,7 @@ import { defineProps } from 'vue'
 import type { CatData } from '@/types/types'
 const props = defineProps<{
   catData: CatData[],
-  centerX: string
+  centerX: string // style for justifyContent value
 }>();
 
 </script>
