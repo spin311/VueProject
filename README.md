@@ -20,8 +20,9 @@ Simple vue project to display a gallery of cats with buttons to like or download
 - Display a list of favorite cat images
 - Banners to display error, info, or success messages
 - Responsive design for mobile, tablet, and desktop
-<br>
+
   ![Phone View](/images/phoneView.jpg)
+
 ## Project structure
 - `src/*` - Vue components, views, stores, services, assets, etc.
 - `dist/*` - Build files
