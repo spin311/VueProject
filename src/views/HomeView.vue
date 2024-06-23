@@ -5,9 +5,10 @@ import SpinnerComponent from '@/components/SpinnerComponent.vue';
 import GalleryComponent from '@/components/GalleryComponent.vue'
 
 const store = useCatDataStore();
+const NUM_CATS_PER_LOAD = 12;
 
 onMounted(() => {
-  if (store.catData.length < 1) store.loadCatData();
+  if (store.catData.length < 1) store.loadCatData(NUM_CATS_PER_LOAD);
   window.addEventListener('scroll', handleScroll);
 
 });
@@ -21,14 +22,14 @@ function handleScroll() {
   const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
 
   if (nearBottom) {
-    store.loadCatData(12);
+    store.loadCatData(NUM_CATS_PER_LOAD);
   }
 }
 </script>
 
 <template>
   <main>
-    <SpinnerComponent :is-loading="store.isLoading" />
-    <GalleryComponent :cat-data="store.catData" :gallery-class="'mainGallery'"></GalleryComponent>
+    <SpinnerComponent v-if="store.isLoading" />
+    <GalleryComponent :cat-data="store.catData" :center-x="'center'"></GalleryComponent>
   </main>
 </template>

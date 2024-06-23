@@ -6,7 +6,7 @@ import { fetchBreeds, fetchCatData } from '@/services/catService'
 export const useCatDataStore = defineStore('catData', () => {
   const isLoading: Ref<boolean> = ref(false);
   const catData: Ref<UnwrapRef<CatData[]>> = ref([]);
-  const catFavorites: ComputedRef<CatData[]> = computed((): CatData[] => catData.value.filter((cat: CatData): boolean => !!cat.isFavorite));
+  const catFavorites: Ref<UnwrapRef<CatData[]>> = ref([]);
   const currentBreedCat: ComputedRef<CatData> = computed((): CatData => catBreedData.value[currentImageIndex.value]);
   const selectedBreedId: ComputedRef<string> = computed((): string => {
     if (catBreedData.value.length > 0 && catBreedData.value[0]?.breeds) {
@@ -27,6 +27,15 @@ export const useCatDataStore = defineStore('catData', () => {
     const catIndex: number = catData.value.findIndex((cat: CatData): boolean => cat.id === catId);
     if (catIndex === -1) return;
     catData.value[catIndex].isFavorite = !catData.value[catIndex].isFavorite;
+
+    if (catData.value[catIndex].isFavorite) {
+      catFavorites.value.push(catData.value[catIndex]);
+    } else {
+      const favoriteIndex: number = catFavorites.value.findIndex((cat: CatData): boolean => cat.id === catId);
+      if (favoriteIndex !== -1) {
+        catFavorites.value.splice(favoriteIndex, 1);
+      }
+    }
   }
 
   function changeImageIndex(change: number): void {

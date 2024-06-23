@@ -8,7 +8,7 @@ const store = useCatDataStore();
 
 <template>
   <main>
-    <GalleryComponent v-if="store.catFavorites.length > 0" :cat-data="store.catFavorites" :gallery-class="'favoritesGallery'"></GalleryComponent>
+    <GalleryComponent v-if="store.catFavorites.length > 0" :cat-data="store.catFavorites" :center-x="'flex-start'" class="ml-2"></GalleryComponent>
     <div v-else class="no-favorites">
       <FontAwesomeIcon icon="far fa-heart" class="heart"/>
       <span>There are no favorites selected.</span>
