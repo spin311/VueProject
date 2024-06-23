@@ -69,9 +69,8 @@ const OnDownloadImage = () => {
 }
 
 .cat-item {
-  flex: 0 0 23%;
-  max-width: 300px;
-  max-height: 300px;
+  flex: 0 0 30%;
+  max-width: 350px;
   margin: 1%;
   box-sizing: border-box;
 }

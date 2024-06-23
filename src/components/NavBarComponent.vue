@@ -26,5 +26,9 @@ function OnCloseBanner(banner: Banner) {
 </template>
 
 <style scoped>
-
+nav {
+  position: sticky;
+  top: 0;
+  background-color: #181818;
+}
 </style>

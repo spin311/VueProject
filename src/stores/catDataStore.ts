@@ -37,7 +37,8 @@ export const useCatDataStore = defineStore('catData', () => {
 
   async function loadCatData(num: number = 20): Promise<void> {
     isLoading.value = true;
-    catData.value = await fetchCatData(num);
+    const newCatData: CatData[] = await fetchCatData(num);
+    catData.value = [...catData.value, ...newCatData];
     isLoading.value = false;
   }
 

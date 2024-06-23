@@ -23,6 +23,7 @@ const props = defineProps<{
   justify-content: center;
 }
 .favoritesGallery {
+  margin-left: 1.2em;
   display: flex;
   gap: 0.4em;
   flex-wrap: wrap;

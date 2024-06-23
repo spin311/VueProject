@@ -10,8 +10,12 @@ const CATS_PER_BREED: number = 7;
 onMounted(async () => {
   if (store.catBreeds.length < 1) {
     await store.loadBreeds();
+    selectedBreedId.value = store.catBreeds[0].id;
   }
-  selectedBreedId.value = store.selectedBreedId;
+  else {
+    selectedBreedId.value = store.selectedBreedId;
+  }
+
 });
 
 const selectedBreedId: Ref<UnwrapRef<string>> = ref('');
