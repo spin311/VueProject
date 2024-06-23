@@ -43,7 +43,7 @@ function getBreedById(breedId: string): Breed {
         </select>
       </div>
     <SpinnerComponent v-if="store.isLoading" />
-      <ScrollableGallery class="mt-1"> </ScrollableGallery>`
+      <ScrollableGallery class="mt-1"> </ScrollableGallery>
   </main>
 </template>
 
