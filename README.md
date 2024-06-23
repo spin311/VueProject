@@ -13,6 +13,9 @@ Simple vue project to display a gallery of cats with buttons to like or download
 6. Run `node server.js` to start the proxy server
 7. Open [`http://localhost:5173/VueProject/`](http://localhost:5173/VueProject/) in your browser
 
+## Run tests
+run `npx cypress open` in root directory to open the cypress test runner
+There are 2 tests: one for the home and favorites page and one for the breed page
 ## Features
 ![Features](/images/features.jpg)
 - Display a gallery of cat images with infinite scroll

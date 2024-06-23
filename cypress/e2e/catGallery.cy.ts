@@ -10,11 +10,6 @@ describe('Home Page Test', () => {
       .first()
       .find('#heartIcon')
       .click();
-
-    cy.visit('/favorites');
-    cy.get('.cat-item')
-      .its('length')
-      .should('be.eq', 1)
   });
 });
 

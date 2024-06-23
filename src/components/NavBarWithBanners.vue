@@ -15,9 +15,9 @@ function OnCloseBanner(banner: Banner) {
 <template>
   <nav>
     <ul class="nav-links">
-      <li><router-link to="/" active-class="active">Home</router-link></li>
-      <li><router-link to="/breeds" active-class="active">Breeds</router-link></li>
-      <li><router-link to="/favorites" active-class="active">Favorites</router-link></li>
+      <li><router-link to="/" active-class="active" id="home">Home</router-link></li>
+      <li><router-link to="/breeds" active-class="active" id="breeds">Breeds</router-link></li>
+      <li><router-link to="/favorites" active-class="active" id="favorites">Favorites</router-link></li>
     </ul>
   </nav>
   <BannerContainer v-if="banners">
