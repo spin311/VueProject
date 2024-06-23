@@ -6,7 +6,7 @@ import SpinnerComponent from '@/components/SpinnerComponent.vue'
 import ScrollableGallery from '@/components/ScrollableGallery.vue'
 
 const store = useCatDataStore();
-const CATS_PER_BREED: number = 9;
+const CATS_PER_BREED: number = 7;
 onMounted(async () => {
   if (store.catBreeds.length < 1) {
     await store.loadBreeds();

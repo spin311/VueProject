@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import NavBarComponent from '@/components/NavBarComponent.vue'
+import NavBarWithBanners from '@/components/NavBarWithBanners.vue'
 </script>
 
 <template>
-  <NavBarComponent/>
+  <NavBarWithBanners/>
   <router-view/>
 </template>
 

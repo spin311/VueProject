@@ -2,8 +2,10 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { useCatDataStore } from '@/stores/catDataStore'
 import GalleryCard from '@/components/GalleryCard.vue'
+import CurrentImageIndicator from '@/components/CurrentImageIndicator.vue'
 const store = useCatDataStore();
 
+// change current image index to display the next or previous image
 function changeImage(change: number) {
   store.changeImageIndex(change);
 }
@@ -19,7 +21,7 @@ function changeImage(change: number) {
         class="switch"
         @click="changeImage(-1)" />
       <div>
-        <GalleryCard :cat="store.currentBreedCat" :show-info="true" :height="'400px'" :width="'550px'"></GalleryCard>
+        <GalleryCard :cat="store.currentBreedCat" :show-info="true" :height="'400px'" :width="'550px'" />
       </div>
       <FontAwesomeIcon
         :class="{'hidden': store.currentImageIndex >= store.catBreedData.length - 1}"
@@ -28,15 +30,9 @@ function changeImage(change: number) {
         @click="changeImage(1)"/>
     </div>
     <div class="progressIcons">
-      <span v-for="(item, index) in store.catBreedData.length" :key="index">
-        <FontAwesomeIcon v-if="index !== store.currentImageIndex"
-                         icon="far fa-circle"
-                         class="progressIcon" />
-        <FontAwesomeIcon v-else
-                         icon="fas fa-circle"
-                         class="progressIcon"
-                         color="green" />
-      </span>
+      <CurrentImageIndicator
+        :cat-breed-len="store.catBreedData.length"
+        :current-image-index="store.currentImageIndex" />
     </div>
   </div>
 </template>
@@ -71,10 +67,5 @@ function changeImage(change: number) {
   display: flex;
   justify-content: center;
   margin-top: 0.5em;
-}
-
-.progressIcon {
-  font-size: 1.2em;
-  margin: 0.2em;
 }
 </style>

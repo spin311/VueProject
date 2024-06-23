@@ -9,9 +9,11 @@ const emit = defineEmits(['favorite-change', 'copy-image', 'download-image']);
 
 const heartIcon = computed(() => (props.isFavorite ? 'fas fa-heart' : 'far fa-heart'));
 
+// if the image is marked as favorite, the heart icon is red, otherwise it is dark
 const heartClass = computed(() => {
   return props.isFavorite ? 'favorite' : 'dark'
 });
+
 const favoriteChange = () => {
   emit('favorite-change');
 }
@@ -29,10 +31,10 @@ function downloadImage() {
 <template>
   <div class="cardButtons">
     <div>
-    <font-awesome-icon :icon="heartIcon" :class="heartClass" class="card-button" @click="favoriteChange"/>
-    <font-awesome-icon icon="far fa-paper-plane" class="dark card-button" @click="copyImage" title="Copy image" />
+    <font-awesome-icon :icon="heartIcon" :class="heartClass" class="card-button" @click="favoriteChange" />
+    <font-awesome-icon icon="far fa-paper-plane" class="dark card-button" title="Copy image" @click="copyImage" />
     </div>
-    <font-awesome-icon icon="fas fa-arrow-down" class="dark card-button" @click="downloadImage" title="Download" />
+    <font-awesome-icon icon="fas fa-arrow-down" class="dark card-button" title="Download" @click="downloadImage" />
   </div>
 </template>
 
@@ -48,7 +50,6 @@ function downloadImage() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .favorite {

@@ -14,6 +14,7 @@ const props = defineProps<{
 const { toggleFavorite } = useCatDataStore();
 const { addBannerMessage } = useBannerStore();
 
+// Toggle the favorite status of current catData item
 function OnFavoriteChange() {
   toggleFavorite(props.cat.id);
 }
@@ -37,6 +38,7 @@ const OnDownloadImage = () => {
     const url = window.URL.createObjectURL(new Blob([response.data]));
     const link = document.createElement('a');
     link.href = url;
+    // file name is the last part of the URL if not available use 'cat.jpg'
     link.setAttribute('download', props.cat.url.split('/').pop() || 'cat.jpg');
     document.body.appendChild(link);
     link.click();

@@ -3,11 +3,18 @@ import { computed, type ComputedRef, type Ref, ref, type UnwrapRef, watch } from
 import type { Breed, CatData } from '@/types/types'
 import { fetchBreeds, fetchCatData } from '@/services/catService'
 
+// storage for catData, catFavorites, catBreeds, catBreedData, currentImageIndex
 export const useCatDataStore = defineStore('catData', () => {
+
+  // cat data
   const isLoading: Ref<boolean> = ref(false);
   const catData: Ref<UnwrapRef<CatData[]>> = ref([]);
+  // favorites array, to keep order of favorites
   const catFavorites: Ref<UnwrapRef<CatData[]>> = ref([]);
+
+  // breed data
   const currentBreedCat: ComputedRef<CatData> = computed((): CatData => catBreedData.value[currentImageIndex.value]);
+  // id of the breed in catBreedData to set as value in the select
   const selectedBreedId: ComputedRef<string> = computed((): string => {
     if (catBreedData.value.length > 0 && catBreedData.value[0]?.breeds) {
       return catBreedData.value[0]?.breeds[0]?.id;
@@ -16,13 +23,15 @@ export const useCatDataStore = defineStore('catData', () => {
   });
   const catBreedData: Ref<UnwrapRef<CatData[]>> = ref([]);
   const catBreeds:  Ref<UnwrapRef<Breed[]>> = ref([]);
+  // index of the currently displayed image in the catBreedData array
   const currentImageIndex: Ref<number> = ref(0);
 
-
+  // when breed data changes, set the current image index to the middle of the new data
   watch (catBreedData, (): void => {
     currentImageIndex.value = Math.floor(catBreedData.value.length / 2);
   });
 
+  // toggle favorite status and add/remove from favorites list
   function toggleFavorite(catId: string): void {
     const catIndex: number = catData.value.findIndex((cat: CatData): boolean => cat.id === catId);
     if (catIndex === -1) return;
@@ -38,12 +47,14 @@ export const useCatDataStore = defineStore('catData', () => {
     }
   }
 
+  // change the current image index by the change value
   function changeImageIndex(change: number): void {
     const newIndex: number = currentImageIndex.value + change;
     if (newIndex < 0 || newIndex > catBreedData.value.length - 1) return;
       currentImageIndex.value  = newIndex;
   }
 
+  // load cat data and add to existing data
   async function loadCatData(num: number = 20): Promise<void> {
     isLoading.value = true;
     const newCatData: CatData[] = await fetchCatData(num);
@@ -61,7 +72,7 @@ export const useCatDataStore = defineStore('catData', () => {
     if (breedId) {
       params.breed_id = breedId;
     }
-    catBreedData.value = await fetchCatData(20, params);
+    catBreedData.value = await fetchCatData(num, params);
     isLoading.value = false;
   }
 

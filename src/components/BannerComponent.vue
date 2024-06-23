@@ -12,7 +12,6 @@ const closeBanner = () => {
 }
 
 const bannerClass = {
-    banner: true,
     error: props.banner.type === 'error',
     success: props.banner.type === 'success',
     info: props.banner.type === 'info',
@@ -25,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="bannerClass">
+  <div :class="bannerClass" class="banner">
     <div class="x-button" @click="closeBanner">X</div>
     {{ banner.message }}
   </div>
@@ -42,13 +41,15 @@ onMounted(() => {
 }
 
 .x-button {
-  float: right;
   cursor: pointer;
+  float: right;
   border: 1px solid;
   padding: 2px 5px;
   margin-left: 10px;
   border-radius: 2px;
 }
+
+/* Banner types */
 
 .error {
   background-color: #f8d7da;

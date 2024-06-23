@@ -6,16 +6,17 @@ import { BannerType } from '@/types/types'
 import { getGuid } from '../utils/utils';
 
 export const useBannerStore = defineStore('banner', () => {
+  // all currently displayed banners
   const banners: Ref<UnwrapRef<Set<Banner>>> = ref(new Set<Banner>());
 
 
   function addBannerMessage(message: string, bannerType: BannerType): void {
-    const errorBanner: Banner = {
+    const banner: Banner = {
       id: getGuid(),
       message: message,
       type: bannerType
     }
-    addBanner(errorBanner)
+    addBanner(banner)
   }
 
   function addBanner(banner: Banner): void {

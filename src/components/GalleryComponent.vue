@@ -11,7 +11,7 @@ const props = defineProps<{
 
 <template>
   <div class="gallery" :style="{ justifyContent: centerX }">
-    <GalleryCard v-for="cat in props.catData" :key="cat.id" :cat="cat" :show-info="false" :height="'250px'" :width="'350px'"></GalleryCard>
+    <GalleryCard v-for="cat in props.catData" :key="cat.id" :cat="cat" :show-info="false" :height="'250px'" :width="'350px'" />
   </div>
 </template>
 

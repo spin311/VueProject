@@ -9,14 +9,7 @@ export interface Breed {
   id: string,
   name: string,
   description: string,
-  wikipedia_url: string,
   temperament: string,
-  origin: string,
-}
-
-export interface Category {
-  id: number,
-  name: string
 }
 
 export interface Banner {
