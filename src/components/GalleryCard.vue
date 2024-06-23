@@ -58,7 +58,7 @@ const OnDownloadImage = () => {
       <img :src="cat.url" :alt="'cat-' + cat.id" :style="{ height: props.height }" />
       <div v-if="props.showInfo && cat.breeds" class="infoText">
         <p><span class="bold">Temperament:</span> {{ cat.breeds[0].temperament }}</p>
-        <p class="mt-1"> {{  cat.breeds[0].description }}</p>
+        <p class="mt-1" id="imageDescription"> {{  cat.breeds[0].description }}</p>
         <p class="mt-2"><span class="bold">Image URL:</span> <a :href="cat.url" target="_blank">{{ cat.url }}</a> </p>
       </div>
       <div v-else>

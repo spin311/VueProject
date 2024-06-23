@@ -32,7 +32,7 @@ function downloadImage() {
 <template>
   <div class="cardButtons">
     <div>
-    <font-awesome-icon :icon="heartIcon" :class="heartClass" class="card-button" @click="favoriteChange" />
+    <font-awesome-icon id="heartIcon" :icon="heartIcon" :class="heartClass" class="card-button" @click="favoriteChange" />
     <font-awesome-icon icon="far fa-paper-plane" class="dark card-button" title="Copy image" @click="copyImage" />
     </div>
     <font-awesome-icon icon="fas fa-arrow-down" class="dark card-button" title="Download" @click="downloadImage" />

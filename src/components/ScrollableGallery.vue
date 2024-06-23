@@ -16,6 +16,7 @@ function changeImage(change: number) {
   <div class="scrollableGallery" v-if="store.currentBreedCat">
     <div class="flex">
       <FontAwesomeIcon
+        id="changeImageLeft"
         :class="{'hidden': store.currentImageIndex <= 0}"
         icon="chevron-left"
         class="switch"
@@ -24,6 +25,7 @@ function changeImage(change: number) {
         <GalleryCard :cat="store.currentBreedCat" :show-info="true" :height="'400px'" :width="'550px'" />
       </div>
       <FontAwesomeIcon
+        id="changeImageRight"
         :class="{'hidden': store.currentImageIndex >= store.catBreedData.length - 1}"
         icon="chevron-left"
         class="mirrored switch"
