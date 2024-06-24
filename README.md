@@ -15,6 +15,7 @@ Simple vue project to display a gallery of cats with buttons to like or download
 
 (Steps 5 and 6 are only needed if you want to use local proxy server)
 P.S. : proxy server is deployed on render.com, when testing locally, uncomment variable serverUrl in `src/services/catService.ts` and comment out the other serverUrl variable to use the local proxy server
+Because server is deployed on a free tier, it may take up to a minute to start up, so the first request may take up to a minute to load.
 ## Run tests
 run `npx cypress open` in root directory to open the cypress test runner
 There are 2 tests: one for the home and favorites page and one for the breed page
