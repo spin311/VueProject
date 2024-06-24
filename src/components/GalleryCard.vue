@@ -2,7 +2,7 @@
 import ImageActions from '@/components/ImageActions.vue';
 import { useCatDataStore } from '@/stores/catDataStore';
 import { BannerType, type CatData } from '@/types/types'
-import axios from 'axios';
+import { downloadImage } from '@/services/catService'
 import { useBannerStore } from '@/stores/bannerStore'
 const props = defineProps<{
   cat: CatData,
@@ -27,26 +27,8 @@ function OnCopyImage() {
 }
 
 const OnDownloadImage = () => {
-  // use proxy because the cat API does not allow direct download
-  const proxyUrl = `http://localhost:3000/download?url=${encodeURIComponent(props.cat.url)}`;
-
-  axios({
-    url: proxyUrl,
-    method: 'GET',
-    responseType: 'blob'
-  }).then((response) => {
-    const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement('a');
-    link.href = url;
-    // file name is the last part of the URL if not available use 'cat.jpg'
-    link.setAttribute('download', props.cat.url.split('/').pop() || 'cat.jpg');
-    document.body.appendChild(link);
-    link.click();
-    addBannerMessage('image downloaded successfully!', BannerType.SUCCESS);
-  }).catch((error) => {
-    addBannerMessage('error downloading the image: ' + error.message.toString(), BannerType.ERROR);
-    console.error('Error downloading the image: ', error);
-  });
+  // call the downloadImage function from the catService
+  downloadImage(props.cat.url);
 };
 
 </script>
